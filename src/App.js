@@ -1,8 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter ,Routes ,Route} from 'react-router-dom';
 import MovieList from './pages/MovieList';
 import MovieDetails from './pages/MovieDetails';
+
 function App() {
   return (
    <BrowserRouter>

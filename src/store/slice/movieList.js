@@ -1,25 +1,25 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 // Action
-export const fetchMovies = createAsyncThunk("fetchMovies", async (page = 1) => {
-  const response = await fetch(
-    `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${page}&sort_by=primary_release_date.asc`,
-    {
-      headers: {
-        Authorization:
-        `Bearer ${process.env.REACT_APP_APIKEY}`,
-      },
-    }
-  );
-  return response.json();
-});
+export const fetchMovies = createAsyncThunk(
+  "fetchMovies",
+  async ({ page = 1, search = null }) => {
+    console.log("query", search);
+    const response = await fetch(
+      search
+        ? `https://api.themoviedb.org/3/search/movie?language=en-US&page=${page}&query=${search}`
+        : `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${page}&sort_by=primary_release_date.asc`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_APIKEY}`,
+        },
+      }
+    );
+    return response.json();
+  }
+);
 
-// https://api.themoviedb.org/3/movie/movie_id?language=en-US
-// API_KEY = 'YOUR_API_KEY'
-// BASE_URL = 'https://api.themoviedb.org/3'
-// SEARCH_ENDPOINT = '/search/movie'
-// LANGUAGE = 'en-US'
-// QUERY = 'your_search_keyword'
+
 
 const movieListSlice = createSlice({
   name: "movie",
@@ -28,16 +28,31 @@ const movieListSlice = createSlice({
     data: [],
     isError: false,
     totalPage: 1,
+    currentPage: 1,
+  },
+  reducers: {
+    emptyValue: (state, action) => {
+      state.data = action.payload || [];
+      state.isError = false;
+      state.totalPage = 1;
+      state.isLoading = false;
+      state.currentPage = 1;
+    },
+    incrementCurrentPage: (state) => {
+      state.currentPage += 1;
+    },
+    setCurrentPageToDefault: (state) => {
+      state.currentPage = 0;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchMovies.pending, (state, action) => {
       state.isLoading = true;
     });
     builder.addCase(fetchMovies.fulfilled, (state, action) => {
-      console.log("🚀 ~ action:", action);
       state.isLoading = false;
-      state.data = [...state.data,...action.payload.results];
-      state.totalPage=action.payload.total_pages;
+      state.data = [...state.data, ...action.payload.results];
+      state.totalPage = action.payload.total_pages;
     });
     builder.addCase(fetchMovies.rejected, (state, action) => {
       console.error("Error", action.payload);
@@ -46,5 +61,6 @@ const movieListSlice = createSlice({
     });
   },
 });
-
+export const { emptyValue, incrementCurrentPage, setCurrentPageToDefault } =
+  movieListSlice.actions;
 export default movieListSlice.reducer;

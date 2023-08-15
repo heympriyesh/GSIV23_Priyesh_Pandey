@@ -4,8 +4,8 @@
 }
 ._movie_detail_img_container{
     height: 300px;
-    width: 300px;
-
+    /* width: 300px; */
+    flex: 0 0 270px;
 }
 .__rest_detail{
     margin-left: 40px;
@@ -20,4 +20,14 @@
 .__rest_detail{
     display: flex;
     flex-direction: column;
+}
+
+@media only screen and (max-width: 600px) {
+    ._main_{
+        flex-direction: column;
+    }
+    .__rest_detail{
+        margin-left: 0;
+        margin-top: 40px;
+    }
 }

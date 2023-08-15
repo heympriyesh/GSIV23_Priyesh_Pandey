@@ -14,19 +14,19 @@ export const fetchMoviesDetails = createAsyncThunk("fetchMoviesDetailsSlice", as
   return response.json();
 });
 
-// https://api.themoviedb.org/3/movie/movie_id?language=en-US
-// API_KEY = 'YOUR_API_KEY'
-// BASE_URL = 'https://api.themoviedb.org/3'
-// SEARCH_ENDPOINT = '/search/movie'
-// LANGUAGE = 'en-US'
-// QUERY = 'your_search_keyword'
-
 const fetchMoviesDetailsSlice = createSlice({
   name: "movieDetails",
   initialState: {
     isLoading: false,
     data: null,
     isError: false,
+  },
+  reducers:{
+    emptyMovieDetailValue:(state,action) => {
+      state.data=action.payload || null;
+      state.isError=false;
+      state.isLoading=false;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchMoviesDetails.pending, (state, action) => {
@@ -43,5 +43,6 @@ const fetchMoviesDetailsSlice = createSlice({
     });
   },
 });
+export const {emptyMovieDetailValue} =fetchMoviesDetailsSlice.actions;
 
 export default fetchMoviesDetailsSlice.reducer;

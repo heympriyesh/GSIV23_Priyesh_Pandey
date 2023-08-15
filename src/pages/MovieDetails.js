@@ -6,6 +6,7 @@ import Header from "../componets/Header";
 import "./css/movie_detail.css";
 import { fetchMoviesDetails } from "../store/slice/movieDetails";
 import Loader from "../componets/Loader";
+import { emptyValue } from "../store/slice/movieList";
 const MovieDetails = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.movieDetail);
@@ -13,6 +14,7 @@ const MovieDetails = () => {
   useEffect(() => {
     console.log("🚀 ~ useEffect:",);
     dispatch(fetchMoviesDetails(movie_id));
+    dispatch(emptyValue([]));
   }, []);
   return (
     <>

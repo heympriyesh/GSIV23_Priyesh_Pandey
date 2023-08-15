@@ -9,10 +9,10 @@ import Loader from "../componets/Loader";
 const MovieList = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.movieList);
+  console.log('state',state)
   const [page, setPage] = useState(1);
-  // console.log("🚀 ~ page:", state);
   useEffect(() => {
-    dispatch(fetchMovies(page));
+    dispatch(fetchMovies({page}));
   }, [page]);
 
   const handelInfiniteScroll = async () => {
@@ -21,9 +21,7 @@ const MovieList = () => {
         window.innerHeight + document.documentElement.scrollTop + 1 >=
         document.documentElement.scrollHeight
       ) {
-        // console.log('inside')
         setPage((prev) => prev + 1);
-        // dispatch(fetchMovies(page));
       }
     } catch (error) {
       console.log(error);
