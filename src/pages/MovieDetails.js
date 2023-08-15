@@ -14,13 +14,19 @@ const MovieDetails = () => {
   const data = useSelector((state) => state.movieDetail);
   const { movie_id } = useParams();
   useEffect(() => {
-    console.log("🚀 ~ useEffect:");
     dispatch(fetchMoviesDetails(movie_id));
     dispatch(emptyValue([]));
   }, []);
 
   const addDefaultSrc = (ev) => {
     ev.target.src = noImagFound;
+  };
+
+  const toHoursAndMinutes = (totalMinutes) => {
+    const hours = Math.floor(totalMinutes / 60);
+    const minutes = totalMinutes % 60;
+
+    return `${hours + ":" + minutes}`;
   };
   return (
     <>
@@ -41,7 +47,8 @@ const MovieDetails = () => {
             </span>
           </h2>
           <p className="_year_length_director">
-            {data?.data?.release_date} | {data?.data?.runtime} | Director
+            {data?.data?.release_date} |{" "}
+            {toHoursAndMinutes(data?.data?.runtime)}
           </p>
           <p className="_cast">Cast : ---</p>
           <p className="_desc_"> Description : {data?.data?.overview}</p>
