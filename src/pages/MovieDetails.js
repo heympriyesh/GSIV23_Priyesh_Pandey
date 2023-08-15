@@ -7,23 +7,30 @@ import "./css/movie_detail.css";
 import { fetchMoviesDetails } from "../store/slice/movieDetails";
 import Loader from "../componets/Loader";
 import { emptyValue } from "../store/slice/movieList";
+import noImagFound from "../assets/image/no_image_found.jpg";
+
 const MovieDetails = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.movieDetail);
   const { movie_id } = useParams();
   useEffect(() => {
-    console.log("🚀 ~ useEffect:",);
+    console.log("🚀 ~ useEffect:");
     dispatch(fetchMoviesDetails(movie_id));
     dispatch(emptyValue([]));
   }, []);
+
+  const addDefaultSrc = (ev) => {
+    ev.target.src = noImagFound;
+  };
   return (
     <>
       <Header />
-      {data?.isLoading && <Loader/>}
+      {data?.isLoading && <Loader />}
       <div className="_main_">
         <div className="_movie_detail_img_container">
           <img
             src={`https://www.themoviedb.org/t/p/w220_and_h330_face/${data?.data?.poster_path}`}
+            onError={(event) => addDefaultSrc(event)}
           />
         </div>
         <div className="__rest_detail">

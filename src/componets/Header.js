@@ -74,7 +74,6 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   let location = useLocation();
-  console.log("🚀 ~ location:", location);
 
   const handleChange = (value) => {
     if (value.length === 0) {

@@ -6,11 +6,16 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
+import noImagFound from '../assets/image/no_image_found.jpg'
 import "./css/moviecard.css";
 const MovieCard = ({data}) => {
   
   const navigate = useNavigate();
-
+  
+  const addDefaultSrc=(ev)=>{
+    ev.target.src = noImagFound
+  }
+  
   return (
 
     <Card sx={{ maxWidth: 270 }} className="card_styl" onClick={()=>navigate(`/detail/${data?.id}`)}>
@@ -21,6 +26,7 @@ const MovieCard = ({data}) => {
             height="300"
             image={`https://www.themoviedb.org/t/p/w220_and_h330_face/${data.poster_path}`}
             alt="green iguana"
+            onError={(event)=>addDefaultSrc(event)}
           />
         </div>
         <CardContent
