@@ -68,6 +68,7 @@ const MovieList = () => {
               transform: "translate(-50% ,-50%)",
               fontSize: "40px",
               color: "#CF3721",
+              whiteSpace:"nowrap"
             }}
           >
            {!state.isLoading?"No Data Found":""} 
