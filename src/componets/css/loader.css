@@ -1,0 +1,18 @@
+.spinner-div {
+    height: 100px;
+    width: 100px;
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+  }
+  .spinner-overlay {
+    background: #00000080;
+    position: fixed;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 9999999999999999999;
+  }

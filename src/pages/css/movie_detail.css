@@ -1,0 +1,23 @@
+._main_{
+    display: flex;
+    margin: 30px;
+}
+._movie_detail_img_container{
+    height: 300px;
+    width: 300px;
+
+}
+.__rest_detail{
+    margin-left: 40px;
+}
+.__rest_detail h2,p{
+    margin: 4px 0;
+}
+._movie_detail_img_container img{
+    height: 100%;
+    width: 100%;
+}
+.__rest_detail{
+    display: flex;
+    flex-direction: column;
+}

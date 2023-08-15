@@ -1,19 +1,25 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
+
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import "./css/moviecard.css";
-const MovieCard = () => {
+const MovieCard = ({data}) => {
+  
+  const navigate = useNavigate();
+
   return (
-    <Card sx={{ maxWidth: 220 }} className="card_styl">
+
+    <Card sx={{ maxWidth: 270 }} className="card_styl" onClick={()=>navigate(`/detail/${data?.id}`)}>
       <CardActionArea>
         <div className="image">
           <CardMedia
             component="img"
-            height="330"
-            image="https://www.themoviedb.org/t/p/w220_and_h330_face/elTZhUPe0uFaTrqISJZoVXSJHxf.jpg"
+            height="300"
+            image={`https://www.themoviedb.org/t/p/w220_and_h330_face/${data.poster_path}`}
             alt="green iguana"
           />
         </div>
@@ -28,14 +34,11 @@ const MovieCard = () => {
             component="div"
             className="_top_movie_name_rating"
           >
-            <div className="__text-trucate">Meg 2: The Trench</div>
-            <div className="_rating">7.5</div>
+            <div className="__text-trucate">{data.original_title}</div>
+            <div className="_rating">{data.vote_average}</div>
           </Typography>
           <Typography variant="p" component="div" className="_des_small">
-            An exploratory dive into the deepest depths of the ocean of a daring
-            research team spirals into chaos when a malevolent mining operation
-            threatens their mission and forces them into a high-stakes battle
-            for survival
+           {data.overview}
           </Typography>
         </CardContent>
       </CardActionArea>
