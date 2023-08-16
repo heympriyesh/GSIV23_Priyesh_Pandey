@@ -8,16 +8,5 @@
     6. Then npm start to start the app.
     7. To make a build use npm run build.
 
-## Elements in which i have done well
-    a.) Making code resuable.
-    b.) used redux toolkit.
-    c.) Used material UI.
-    d.) Page is responive.
-    e.) handled the movie cards in which the image link is broken.
-    f.) handled no data found case.
-    g.) added deboucning to handle the search.
-
-## Improvements if i have more 4 hours
-    I will try to add more functionality 
 ### Link : https://64db8c11e4f0ac6c882cd9b7--statuesque-granita-9c7ec7.netlify.app/
 
